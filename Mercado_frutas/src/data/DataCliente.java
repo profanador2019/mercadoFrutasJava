@@ -150,5 +150,35 @@ public class DataCliente {
 			}
 		}
 	}
+	
+	public Cliente getById(Cliente c) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Cliente cliente = new Cliente();
+		try {
+			stmt = DBConnector.getInstancia().getConn().prepareStatement("select * from cliente where id=?");
+			stmt.setInt(1, c.getId());
+			rs = stmt.executeQuery();
+			if(rs!=null) {
+				c.setId(rs.getInt("id_cliente"));
+				c.setApellido(rs.getString("apellido"));
+				c.setNombre(rs.getString("nombre"));
+				c.setDni(rs.getInt("dni"));
+				c.setEmail(rs.getString("email"));
+				c.setDireccion(rs.getString("direccion"));
+				c.setTel(rs.getInt("tel"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DBConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		} return cliente;
+	}
 
 }
