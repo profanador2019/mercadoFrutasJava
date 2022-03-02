@@ -1,16 +1,16 @@
 package entities;
 
 public class Proveedor {
-	int dni;
+	int cuil;
 	String apellido;
 	String nombre;
 	int tel;
 	
-	public int getDni() {
-		return dni;
+	public int getCuil() {
+		return cuil;
 	}
-	public void setDni(int dni) {
-		this.dni = dni;
+	public void setCuil(int cuil) {
+		this.cuil = cuil;
 	}
 	public String getApellido() {
 		return apellido;

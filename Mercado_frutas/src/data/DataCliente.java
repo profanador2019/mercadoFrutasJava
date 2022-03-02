@@ -159,7 +159,7 @@ public class DataCliente {
 			stmt = DBConnector.getInstancia().getConn().prepareStatement("select * from cliente where id=?");
 			stmt.setInt(1, c.getId());
 			rs = stmt.executeQuery();
-			if(rs!=null) {
+			if(rs!=null && rs.next()) {
 				c.setId(rs.getInt("id_cliente"));
 				c.setApellido(rs.getString("apellido"));
 				c.setNombre(rs.getString("nombre"));
@@ -179,6 +179,40 @@ public class DataCliente {
 				e.printStackTrace();
 			}
 		} return cliente;
+	}
+	
+	public void setCliente(Pedido p) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = DBConnector.getInstancia().getConn()
+					.prepareStatement("select * "
+							+ "from cliente natural join pedido "
+							+ "where nro_pedido=?");
+			rs = stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				Cliente c = new Cliente();
+				c.setId(rs.getInt("id_cliente"));
+				c.setDni(rs.getInt("dni"));
+				c.setApellido(rs.getString("apellido"));
+				c.setNombre(rs.getString("nombre"));
+				c.setEmail(rs.getString("email"));
+				c.setDireccion(rs.getString("direccion"));
+				c.setTel(rs.getInt("tel"));
+				
+				p.setCliente(c);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DBConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

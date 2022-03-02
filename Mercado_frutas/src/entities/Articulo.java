@@ -5,10 +5,17 @@ public class Articulo {
 	private String nombre;
 	private String descripcion;
 	private int cant_aprox_kg;
-	private float precio;
-	private float precio_sugerido;
+	private double precio;
+	private double precio_sugerido;
 	private Proveedor proveedor;
+	private int stock;
 	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
@@ -39,16 +46,16 @@ public class Articulo {
 	public void setCant_aprox_kg(int cant_aprox_kg) {
 		this.cant_aprox_kg = cant_aprox_kg;
 	}
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public float getPrecio_sugerido() {
+	public double getPrecio_sugerido() {
 		return precio_sugerido;
 	}
-	public void setPrecio_sugerido(float precio_sugerido) {
+	public void setPrecio_sugerido(double precio_sugerido) {
 		this.precio_sugerido = precio_sugerido;
 	}
 	

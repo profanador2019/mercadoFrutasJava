@@ -16,5 +16,10 @@ public class LineaPedido {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	public double getSubtotal() {
+		return (this.articulo.getPrecio()*this.cantidad);
+		
+	}
 
 }

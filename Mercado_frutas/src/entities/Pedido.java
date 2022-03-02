@@ -8,15 +8,15 @@ public class Pedido {
 	private LocalDateTime fecha_pedido;
 	private int cant_bultos;
 	private boolean abonado;
+	private LocalDateTime fecha_abonado;
 	private boolean retirado;
 	private LinkedList<LineaPedido> lineas;
 	private Cliente cliente;
 	private Personal vendedor;
 	
-	public Pedido(Personal v) {
+	public Pedido() {
 		this.setFecha_pedido(LocalDateTime.now());
 		this.setLineas(new LinkedList<LineaPedido>());
-		this.setVendedor(v);
 	}
 	
 	public int getNro_pedido() {
@@ -49,7 +49,13 @@ public class Pedido {
 	public void setRetirado(boolean retirado) {
 		this.retirado = retirado;
 	}
-	public LinkedList<LineaPedido> getLineas() {
+	public LocalDateTime getFecha_abonado() {
+		return fecha_abonado;
+	}
+    public void setFecha_abonado(LocalDateTime fecha_abonado) {
+		this.fecha_abonado = fecha_abonado;
+	}
+    public LinkedList<LineaPedido> getLineas() {
 		return lineas;
 	}
 	public void setLineas(LinkedList<LineaPedido> lineas) {
@@ -66,6 +72,21 @@ public class Pedido {
 	}
 	public void setVendedor(Personal vendedor) {
 		this.vendedor = vendedor;
+	}
+	
+	public void añadirLinea(Articulo art, LineaPedido linea) {
+		LineaPedido l = new LineaPedido();
+		l.setArticulo(art);
+		l.setCantidad(linea.getCantidad());
+		this.lineas.add(l);
+	}
+	
+	public double getTotal() {
+		double total=0;
+		for(LineaPedido l: this.lineas) {
+			total=total+l.getSubtotal();
+		}
+		return total;
 	}
 	
 	
