@@ -53,4 +53,12 @@ public class ControladorPedido {
 		return dp.getPedidosRecientes();
 	}
 	
+	public void abonarPedido(Pedido p) {
+		dp.setAbonado(p);
+	}
+	
+	public void retirarPedido(Pedido p) {
+		dp.setRetirado(p);
+	}
+	
 }	

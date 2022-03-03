@@ -37,7 +37,7 @@ public class DataPedido {
 				if(stmt!=null) {stmt.close();}
 				DBConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace(); // hacer save lineas(art_pedido)
+				e.printStackTrace();
 			}
 		}
 	}
@@ -147,6 +147,47 @@ public class DataPedido {
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DBConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void setAbonado(Pedido p) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DBConnector.getInstancia().getConn()
+					.prepareStatement("update pedido "
+							+ "set abonado=1, fecha_abonado=? where nro_pedido=?");
+			
+			stmt.setObject(1,LocalDateTime.now());
+			stmt.setInt(2,p.getNro_pedido());
+			stmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DBConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void setRetirado(Pedido p) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DBConnector.getInstancia().getConn()
+					.prepareStatement("update pedido set retirado=1 where nro_pedido=?");
+			stmt.setInt(1,p.getNro_pedido());
+			stmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
 				if(stmt!=null) {stmt.close();}
 				DBConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {

@@ -154,12 +154,13 @@ public class DataCliente {
 	public Cliente getById(Cliente c) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		Cliente cliente = new Cliente();
+		Cliente cliente = null;
 		try {
 			stmt = DBConnector.getInstancia().getConn().prepareStatement("select * from cliente where id=?");
 			stmt.setInt(1, c.getId());
 			rs = stmt.executeQuery();
 			if(rs!=null && rs.next()) {
+				cliente = new Cliente();
 				c.setId(rs.getInt("id_cliente"));
 				c.setApellido(rs.getString("apellido"));
 				c.setNombre(rs.getString("nombre"));

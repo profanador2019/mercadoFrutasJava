@@ -9,7 +9,7 @@ public class DataArticulo {
 	public Articulo getDisponible(Articulo art, LineaPedido linea) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		Articulo a = new Articulo();
+		Articulo a = null;
 		DataProveedor dp = new DataProveedor();
 		try {
 			stmt = DBConnector.getInstancia().getConn().prepareStatement("select * from articulo where id_articulo=? and stock>=?" );
@@ -17,6 +17,7 @@ public class DataArticulo {
 			stmt.setInt(2,linea.getCantidad());
 			rs = stmt.executeQuery();
 			if(rs!=null && rs.next()) {
+				a = new Articulo();
 				a.setId_articulo(rs.getInt("id_articulo"));
 				a.setNombre(rs.getString("nombre"));
 				a.setDescripcion(rs.getString("descripcion"));
