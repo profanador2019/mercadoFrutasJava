@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class Pedido {
+	
+
 	private int nro_pedido;
 	private LocalDateTime fecha_pedido;
 	private int cant_bultos;
@@ -87,6 +89,13 @@ public class Pedido {
 			total=total+l.getSubtotal();
 		}
 		return total;
+	}
+	
+	@Override
+	public String toString() {
+		return "Pedido [nro_pedido=" + nro_pedido + ", fecha_pedido=" + fecha_pedido + ", cant_bultos=" + cant_bultos
+				+ ", abonado=" + abonado + ", fecha_abonado=" + fecha_abonado + ", retirado=" + retirado + ", lineas="
+				+ lineas + ", cliente=" + cliente + ", vendedor=" + vendedor + "]";
 	}
 	
 	

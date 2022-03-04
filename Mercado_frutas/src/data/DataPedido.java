@@ -78,7 +78,8 @@ public class DataPedido {
 		LinkedList<Pedido> pedidos = new LinkedList<>();
 		try {
 			stmt=DBConnector.getInstancia().getConn()
-					.prepareStatement("select * from pedido where date(fecha_pedido)='?'");
+					.prepareStatement("select * from pedido where date(fecha_pedido)=?");
+
 			stmt.setObject(1,LocalDate.now());
 			rs = stmt.executeQuery();
 			if(rs!=null) {

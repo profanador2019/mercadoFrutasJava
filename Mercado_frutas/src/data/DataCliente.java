@@ -156,18 +156,18 @@ public class DataCliente {
 		ResultSet rs = null;
 		Cliente cliente = null;
 		try {
-			stmt = DBConnector.getInstancia().getConn().prepareStatement("select * from cliente where id=?");
+			stmt = DBConnector.getInstancia().getConn().prepareStatement("select * from cliente where id_cliente=?");
 			stmt.setInt(1, c.getId());
 			rs = stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				cliente = new Cliente();
-				c.setId(rs.getInt("id_cliente"));
-				c.setApellido(rs.getString("apellido"));
-				c.setNombre(rs.getString("nombre"));
-				c.setDni(rs.getInt("dni"));
-				c.setEmail(rs.getString("email"));
-				c.setDireccion(rs.getString("direccion"));
-				c.setTel(rs.getInt("tel"));
+				cliente.setId(rs.getInt("id_cliente"));
+				cliente.setApellido(rs.getString("apellido"));
+				cliente.setNombre(rs.getString("nombre"));
+				cliente.setDni(rs.getInt("dni"));
+				cliente.setEmail(rs.getString("email"));
+				cliente.setDireccion(rs.getString("direccion"));
+				cliente.setTel(rs.getInt("tel"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -190,6 +190,8 @@ public class DataCliente {
 					.prepareStatement("select * "
 							+ "from cliente natural join pedido "
 							+ "where nro_pedido=?");
+			
+			stmt.setInt(1,p.getNro_pedido());
 			rs = stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				Cliente c = new Cliente();

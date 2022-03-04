@@ -10,6 +10,10 @@ public class Personal {
 	String contraseña;
 	LinkedList<Rol> roles;
 	
+	public Personal() {
+		roles = new LinkedList<Rol>();
+	}
+	
 	public int getDni() {
 		return dni;
 	}
@@ -33,6 +37,19 @@ public class Personal {
 	}
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+    public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+	@Override
+	public String toString() {
+		return "Personal [dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", usuario=" + usuario
+				+ ", contraseña=" + contraseña + ", roles=" + roles + "]";
 	}
 	
 	
