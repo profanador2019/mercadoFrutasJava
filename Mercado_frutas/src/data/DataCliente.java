@@ -9,12 +9,13 @@ public class DataCliente {
 	public LinkedList<Cliente> getAll(){
 		Statement stmt=null;
 		ResultSet rs=null;
-		LinkedList<Cliente> clientes=new LinkedList<Cliente>();
+		LinkedList<Cliente> clientes = null;
 		try {
 			stmt = DBConnector.getInstancia().getConn().createStatement();
 			rs=stmt.executeQuery("select * from cliente");
 			if(rs!=null) {
-			    while(rs.next()) {
+			    clientes = new LinkedList<Cliente>();
+				while(rs.next()) {
 				Cliente cli = new Cliente();
 				cli.setId(rs.getInt("id_cliente"));
 				cli.setDni(rs.getInt("dni"));
